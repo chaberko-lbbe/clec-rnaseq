@@ -2,11 +2,11 @@
 
 Contact : chloe.haberkorn@univ-lyon1.fr / chloehbk@gmail.com
 
-### Short summary
+## Short summary
 
 
 
-### Table of Contents
+## Table of Contents
 
 - **[Installing tools](#Installing-tools)**
 
