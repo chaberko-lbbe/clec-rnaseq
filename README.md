@@ -10,14 +10,15 @@ Contact : chloe.haberkorn@univ-lyon1.fr / chloehbk@gmail.com
 
 - **[Installing tools](#Installing-tools)**
 
-- **[RNA-seq data processing](#Pool-seq-data-processing)**
+- **[RNA-seq data processing](#RNA-seq-data-processing)**
 	- [Getting the data](#Getting-the-data)
 	- [Checking quality](#Checking-quality)
 	- [Mapping with STAR](#Mapping-with-STAR)
 
 - **[Differential Expression analyzes](#Overall-SNPs-analyzes)**
-  - [Formatting the data for R/DESeq](#Formatting-the-data-for-R/DESeq)
-  - 
+	- [Formatting the data for R/DESeq](#Formatting-the-data-for-R/DESeq)
+	- [Running and interpreting R/DESeq](#Running-and-interpreting-R/DESeq)
+ 
 
 ## Installing tools
 
@@ -155,6 +156,8 @@ rownames(coldata_1) <- colnames(cts_1) # all samples names
 coldata_1$treatment <- factor(coldata_1$treatment)
 coldata_1$strain <- factor(coldata_1$strain)
 ```
+
+### Running and interpreting R/DESeq
 
 Now try DESeq package !
 ```
