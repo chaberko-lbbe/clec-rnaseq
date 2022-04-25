@@ -9,9 +9,7 @@ We used two strain of *Cimex lectularius*: "London Lab", a susceptible strain to
 For each strain, 24 unfed, virgin adult females of 7-days old were sampled.
 Four replicates of 8 insects were performed for each condition: treated lab, untreated lab, treated field, untreated field; i.e. a total of 4 conditions. 
 Treated insects were exposed to 0.1 ng of deltamethrin powder diluted in 1 μL of acetone, whereas control insects received 1 μL of acetone only. This dose of insecticide should correspond to a lethal dose for 50% of London Lab strain.
-For each replicate, three individuals were randomly sampled **out of survivors**, and immediately flash-frozen in liquid nitrogen and stored at -80°.
-Total = 3 individuals x 4 replicates x 4 conditions 
-      = 48 individuals.
+For each replicate, three individuals were randomly sampled **out of survivors**, and immediately flash-frozen in liquid nitrogen and stored at -80°, for a total of 48 individuals (3 individuals x 4 replicates x 4 conditions).
 
 ## Table of Contents
 
