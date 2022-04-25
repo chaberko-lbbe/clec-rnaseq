@@ -130,7 +130,7 @@ cts_1 <- cbind(Sample_1T1LL[,c(1,4)],Sample_2T1LL[,4],Sample_3T1LL[,4],Sample_4T
                Sample_1E1LF[,4],Sample_2E1LF[,4],Sample_3E1LF[,4],Sample_4E2LF[,4],Sample_5E2LF[,4],Sample_6E2LF[,4],
                Sample_7E3LF[,4],Sample_8E3LF[,4],Sample_9E3LF[,4],Sample_10E4LF[,4],Sample_11E4LF[,4],Sample_12E4LF[,4])
                
-colnames(cts_4) <- c("GeneID","untreatedlab1","untreatedlab2","untreatedlab3","untreatedlab4","untreatedlab5","untreatedlab6",
+colnames(cts_1) <- c("GeneID","untreatedlab1","untreatedlab2","untreatedlab3","untreatedlab4","untreatedlab5","untreatedlab6",
                      "untreatedlab7","untreatedlab8","untreatedlab9","untreatedlab10","untreatedlab11","untreatedlab12",
                      "treatedlab1","treatedlab2","treatedlab3","treatedlab4","treatedlab5","treatedlab6",
                      "treatedlab7","treatedlab8","treatedlab9","treatedlab10","treatedlab11","treatedlab12",
@@ -138,14 +138,37 @@ colnames(cts_4) <- c("GeneID","untreatedlab1","untreatedlab2","untreatedlab3","u
                      "untreatedfield7","untreatedfield8","untreatedfield9","untreatedfield10","untreatedfield11","untreatedfield12",
                      "treatedfield1","treatedfield2","treatedfield3","treatedfield4","treatedfield5","treatedfield6",
                      "treatedfield7","treatedfield8","treatedfield9","treatedfield10","treatedfield11","treatedfield12")
-```
-
-
-
-
 
 rownames(cts_1) <- cts_1[,1]
 cts_1 <- cts_1[,-1]
 cts_1 <- as.matrix(cts_1)
-cts_1
+```
+
+Build a "coldata" table with infos on data:
+
+```
+coldata_1 <- data.frame(treatment=c(rep("untreated",12), rep("treated",12),rep("untreated",12), rep("treated",12)),
+                        strain=c(rep("lab",24), rep("field",24)))
+
+rownames(coldata_1) <- colnames(cts_1) # all samples names
+
+coldata_1$treatment <- factor(coldata_1$treatment)
+coldata_1$strain <- factor(coldata_1$strain)
+```
+
+Now try DESeq package !
+```
+library("DESeq2")
+
+ncol(cts_1) # = 48
+nrow(coldata_1) # = 48 > check same value as above
+
+dds_1 <- DESeqDataSetFromMatrix(countData = cts_1,
+                                colData = coldata_1,
+                                design = ~strain+treatment+strain:treatment) # add interaction
+dds_1$treatment <- relevel(dds_1$treatment, ref = "untreated") # define reference
+dds_1$strain <- relevel(dds_1$strain, ref = "lab")
+
+dds_1 <- DESeq(dds_1)
+```
 
