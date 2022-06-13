@@ -4,12 +4,12 @@ Contact : chloe.haberkorn@univ-lyon1.fr / chloehbk@gmail.com
 
 ## Short summary
 
-We used two strain of *Cimex lectularius*: "London Lab", a susceptible strain to insecticides, and "London Field", with moderate resistant to pyrethroids.
+We used four strains of *Cimex lectularius*: "London Lab" and "German Lab", susceptible strains to pyrethroid insecticides, together with "London Field" and Sweden Field, with moderate to high resistant to pyrethroids.
 
 For each strain, 24 unfed, virgin adult females of 7-days old were sampled.
-Four replicates of 8 insects were performed for each condition: treated lab, untreated lab, treated field, untreated field; i.e. a total of 4 conditions. 
-Treated insects were exposed to 0.1 ng of deltamethrin powder diluted in 1 μL of acetone, whereas control insects received 1 μL of acetone only. This dose of insecticide should correspond to a lethal dose for 50% of London Lab strain.
-For each replicate, three individuals were randomly sampled **out of survivors**, and immediately flash-frozen in liquid nitrogen and stored at -80°, for a total of 48 individuals (3 individuals x 4 replicates x 4 conditions).
+Four replicates of 8 insects were performed for each condition: treated London Lab, untreated London Lab, treated German Lab, untreated German Lab, treated London Field, untreated London Field, treated Sweden Field, untreated Sweden Field ; i.e. a total of 8 conditions. 
+Treated insects were exposed to 0.1 ng of deltamethrin powder diluted in 1 μL of acetone, whereas control insects received 1 μL of acetone only. This dose of insecticide should correspond to a lethal dose for 50% of susceptible strains.
+For each replicate, three individuals were randomly sampled **out of survivors**, and immediately flash-frozen in liquid nitrogen and stored at -80°, for a total of 96 individuals (3 individuals x 4 replicates x 8 conditions).
 
 <img src="https://github.com/chaberko-lbbe/clec-rnaseq/blob/main/design-rnaseq.png" width="40%" height="40%">
 
