@@ -114,8 +114,9 @@ We used as input "ReadsPerGene.out.tab" files
 
 We needed for DESeq2 to build a "cts" matrix with gene count by gene for each sample, together with a "coldata" table with infos on data :
 - untreated (T) or treated (E as "exposed")
-- lab (LL as "London Lab") or field (LF) strain
-- biological replicate number from one to four.
+- lab or field strain
+- strain origin (LL for London Lab, GL for German Lab, LF for London Field, SF for Sweden Field)
+- biological replicate number from one to four (according to [DESeq2 Group condition](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#group-specific-condition-effects-individuals-nested-within-groups), we have to distinguish the individuals nested within a group).
 
 ### Formatting the data for R/DESeq
 
