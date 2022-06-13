@@ -150,22 +150,38 @@ cts <- cbind(Sample_1T1LL[,c(1,4)],Sample_2T1LL[,4],Sample_3T1LL[,4],Sample_4T2L
              Sample_1E1SF[,4],Sample_2E1SF[,4],Sample_3E1SF[,4],Sample_4E2SF[,4],Sample_5E2SF[,4],Sample_6E2SF[,4],
              Sample_7E3SF[,4],Sample_8E3SF[,4],Sample_9E3SF[,4],Sample_10E4SF[,4],Sample_11E4SF[,4],Sample_12E4SF[,4])
 
-colnames(cts) <- c("GeneID","untreatedLLlab1","untreatedLLlab2","untreatedLLlab3","untreatedLLlab4","untreatedLLlab5","untreatedLLlab6",
-                   "untreatedLLlab7","untreatedLLlab8","untreatedLLlab9","untreatedLLlab10","untreatedLLlab11","untreatedLLlab12",
-                   "treatedLLlab1","treatedLLlab2","treatedLLlab3","treatedLLlab4","treatedLLlab5","treatedLLlab6",
-                   "treatedLLlab7","treatedLLlab8","treatedLLlab9","treatedLLlab10","treatedLLlab11","treatedLLlab12",
-                   "untreatedLFfield1","untreatedLFfield2","untreatedLFfield3","untreatedLFfield4","untreatedLFfield5","untreatedLFfield6",
-                   "untreatedLFfield7","untreatedLFfield8","untreatedLFfield9","untreatedLFfield10","untreatedLFfield11","untreatedLFfield12",
-                   "treatedLFfield1","treatedLFfield2","treatedLFfield3","treatedLFfield4","treatedLFfield5","treatedLFfield6",
-                   "treatedLFfield7","treatedLFfield8","treatedLFfield9","treatedLFfield10","treatedLFfield11","treatedLFfield12",
-                   "untreatedGLlab1","untreatedGLlab2","untreatedGLlab3","untreatedGLlab4","untreatedGLlab5","untreatedGLlab6",
-                   "untreatedGLlab7","untreatedGLlab8","untreatedGLlab9","untreatedGLlab10","untreatedGLlab11","untreatedGLlab12",
-                   "treatedGLlab1","treatedGLlab2","treatedGLlab3","treatedGLlab4","treatedGLlab5","treatedGLlab6",
-                   "treatedGLlab7","treatedGLlab8","treatedGLlab9","treatedGLlab10","treatedGLlab11","treatedGLlab12",
-                   "untreatedSFfield1","untreatedSFfield2","untreatedSFfield3","untreatedSFfield4","untreatedSFfield5","untreatedSFfield6",
-                   "untreatedSFfield7","untreatedSFfield8","untreatedSFfield9","untreatedSFfield10","untreatedSFfield11","untreatedSFfield12",
-                   "treatedSFfield1","treatedSFfield2","treatedSFfield3","treatedSFfield4","treatedSFfield5","treatedSFfield6",
-                   "treatedSFfield7","treatedSFfield8","treatedSFfield9","treatedSFfield10","treatedSFfield11","treatedSFfield12")
+colnames(cts) <- c("GeneID","untreatedLLlabone1","untreatedLLlabone2","untreatedLLlabone3",
+                   "untreatedLLlabtwo4","untreatedLLlabtwo5","untreatedLLlabtwo6",
+                   "untreatedLLlabthree7","untreatedLLlabthree8","untreatedLLlabthree9",
+                   "untreatedLLlab10four","untreatedLLlabfour11","untreatedLLlabfour12",
+                   "treatedLLlabone1","treatedLLlabone2","treatedLLlabone3",
+                   "treatedLLlabtwo4","treatedLLlabtwo5","treatedLLlabtwo6",
+                   "treatedLLlabthree7","treatedLLlabthree8","treatedLLlabthree9",
+                   "treatedLLlabfour10","treatedLLlabfour11","treatedLLlabfour12",
+                   "untreatedLFfieldone1","untreatedLFfieldone2","untreatedLFfieldone3",
+                   "untreatedLFfieldtwo4","untreatedLFfieldtwo5","untreatedLFfieldtwo6",
+                   "untreatedLFfieldthree7","untreatedLFfieldthree8","untreatedLFfieldthree9",
+                   "untreatedLFfieldfour10","untreatedLFfieldfour11","untreatedLFfieldfour12",
+                   "treatedLFfieldone1","treatedLFfieldone2","treatedLFfieldone3",
+                   "treatedLFfieldtwo4","treatedLFfieldtwo5","treatedLFfieldtwo6",
+                   "treatedLFfieldthree7","treatedLFfieldthree8","treatedLFfieldthree9",
+                   "treatedLFfieldfour10","treatedLFfieldfour11","treatedLFfieldfour12",
+                   "untreatedGLlabone1","untreatedGLlabone2","untreatedGLlabone3",
+                   "untreatedGLlabtwo4","untreatedGLlabtwo5","untreatedGLlabtwo6",
+                   "untreatedGLlabthree7","untreatedGLlabthree8","untreatedGLlabthree9",
+                   "untreatedGLlabfour10","untreatedGLlabfour11","untreatedGLlabfour12",
+                   "treatedGLlabone1","treatedGLlabone2","treatedGLlabone3",
+                   "treatedGLlabtwo4","treatedGLlabtwo5","treatedGLlabtwo6",
+                   "treatedGLlabthree7","treatedGLlabthree8","treatedGLlabthree9",
+                   "treatedGLlabfour10","treatedGLlabfour11","treatedGLlabfour12",
+                   "untreatedSFfieldone1","untreatedSFfieldone2","untreatedSFfieldone3",
+                   "untreatedSFfieldtwo4","untreatedSFfieldtwo5","untreatedSFfieldtwo6",
+                   "untreatedSFfieldthree7","untreatedSFfieldthree8","untreatedSFfieldthree9",
+                   "untreatedSFfieldfour10","untreatedSFfieldfour11","untreatedSFfieldfour12",
+                   "treatedSFfieldone1","treatedSFfieldone2","treatedSFfieldone3",
+                   "treatedSFfieldtwo4","treatedSFfieldtwo5","treatedSFfieldtwo6",
+                   "treatedSFfieldthree7","treatedSFfieldthree8","treatedSFfieldthree9",
+                   "treatedSFfieldfour10","treatedSFfieldfour11","treatedSFfieldfour12")
 
 rownames(cts) <- cts[,1]
 cts <- cts[,-1]
@@ -207,6 +223,7 @@ dds <- DESeqDataSetFromMatrix(countData = cts,
 
 dds$treatment <- relevel(dds$treatment, ref = "untreated")
 dds$strain <- relevel(dds$strain, ref = "lab")
+```
 
 We performed a minimal pre-filtering to keep only rows that have at least 10 reads total before running DESeq:
 ```
