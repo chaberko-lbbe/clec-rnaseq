@@ -118,6 +118,9 @@ We needed for DESeq2 to build a "cts" matrix with gene count by gene for each sa
 - strain origin (LL for London Lab, GL for German Lab, LF for London Field, SF for Sweden Field)
 - biological replicate number from one to four (according to [DESeq2 Group condition](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#group-specific-condition-effects-individuals-nested-within-groups), we have to distinguish the individuals nested within a group).
 
+Values in the matrix should be un-normalized counts, as DESeq2 model internally corrects for library size.
+
+
 ### Formatting the data for R/DESeq
 
 As we briefly saw before, we first need to format the output data from STAR.
@@ -130,39 +133,59 @@ Sample_1T1LL <- Sample_1T1LL[grepl('LOC.*', Sample_1T1LL$GeneID),] # 13,208 rows
 
 Build a "cts" matrix with gene count by gene for each sample:
 ```
-cts_1 <- cbind(Sample_1T1LL[,c(1,4)],Sample_2T1LL[,4],Sample_3T1LL[,4],Sample_4T2LL[,4],Sample_5T2LL[,4],Sample_6T2LL[,4],
-               Sample_7T3LL[,4],Sample_8T3LL[,4],Sample_9T3LL[,4],Sample_10T4LL[,4],Sample_11T4LL[,4],Sample_12T4LL[,4],
-               Sample_1E1LL[,4],Sample_2E1LL[,4],Sample_3E1LL[,4],Sample_4E2LL[,4],Sample_5E2LL[,4],Sample_6E2LL[,4],
-               Sample_7E3LL[,4],Sample_8E3LL[,4],Sample_9E3LL[,4],Sample_10E4LL[,4],Sample_11E4LL[,4],Sample_12E4LL[,4],
-               Sample_1T1LF[,4],Sample_2T1LF[,4],Sample_3T1LF[,4],Sample_4T2LF[,4],Sample_5T2LF[,4],Sample_6T2LF[,4],
-               Sample_7T3LF[,4],Sample_8T3LF[,4],Sample_9T3LF[,4],Sample_10T4LF[,4],Sample_11T4LF[,4],Sample_12T4LF[,4],
-               Sample_1E1LF[,4],Sample_2E1LF[,4],Sample_3E1LF[,4],Sample_4E2LF[,4],Sample_5E2LF[,4],Sample_6E2LF[,4],
-               Sample_7E3LF[,4],Sample_8E3LF[,4],Sample_9E3LF[,4],Sample_10E4LF[,4],Sample_11E4LF[,4],Sample_12E4LF[,4])
-               
-colnames(cts_1) <- c("GeneID","untreatedlab1","untreatedlab2","untreatedlab3","untreatedlab4","untreatedlab5","untreatedlab6",
-                     "untreatedlab7","untreatedlab8","untreatedlab9","untreatedlab10","untreatedlab11","untreatedlab12",
-                     "treatedlab1","treatedlab2","treatedlab3","treatedlab4","treatedlab5","treatedlab6",
-                     "treatedlab7","treatedlab8","treatedlab9","treatedlab10","treatedlab11","treatedlab12",
-                     "untreatedfield1","untreatedfield2","untreatedfield3","untreatedfield4","untreatedfield5","untreatedfield6",
-                     "untreatedfield7","untreatedfield8","untreatedfield9","untreatedfield10","untreatedfield11","untreatedfield12",
-                     "treatedfield1","treatedfield2","treatedfield3","treatedfield4","treatedfield5","treatedfield6",
-                     "treatedfield7","treatedfield8","treatedfield9","treatedfield10","treatedfield11","treatedfield12")
+cts <- cbind(Sample_1T1LL[,c(1,4)],Sample_2T1LL[,4],Sample_3T1LL[,4],Sample_4T2LL[,4],Sample_5T2LL[,4],Sample_6T2LL[,4],
+             Sample_7T3LL[,4],Sample_8T3LL[,4],Sample_9T3LL[,4],Sample_10T4LL[,4],Sample_11T4LL[,4],Sample_12T4LL[,4],
+             Sample_1E1LL[,4],Sample_2E1LL[,4],Sample_3E1LL[,4],Sample_4E2LL[,4],Sample_5E2LL[,4],Sample_6E2LL[,4],
+             Sample_7E3LL[,4],Sample_8E3LL[,4],Sample_9E3LL[,4],Sample_10E4LL[,4],Sample_11E4LL[,4],Sample_12E4LL[,4],
+             Sample_1T1LF[,4],Sample_2T1LF[,4],Sample_3T1LF[,4],Sample_4T2LF[,4],Sample_5T2LF[,4],Sample_6T2LF[,4],
+             Sample_7T3LF[,4],Sample_8T3LF[,4],Sample_9T3LF[,4],Sample_10T4LF[,4],Sample_11T4LF[,4],Sample_12T4LF[,4],
+             Sample_1E1LF[,4],Sample_2E1LF[,4],Sample_3E1LF[,4],Sample_4E2LF[,4],Sample_5E2LF[,4],Sample_6E2LF[,4],
+             Sample_7E3LF[,4],Sample_8E3LF[,4],Sample_9E3LF[,4],Sample_10E4LF[,4],Sample_11E4LF[,4],Sample_12E4LF[,4],
+             Sample_1T1GL[,4],Sample_2T1GL[,4],Sample_3T1GL[,4],Sample_4T2GL[,4],Sample_5T2GL[,4],Sample_6T2GL[,4],
+             Sample_7T3GL[,4],Sample_8T3GL[,4],Sample_9T3GL[,4],Sample_10T4GL[,4],Sample_11T4GL[,4],Sample_12T4GL[,4],
+             Sample_1E1GL[,4],Sample_2E1GL[,4],Sample_3E1GL[,4],Sample_4E2GL[,4],Sample_5E2GL[,4],Sample_6E2GL[,4],
+             Sample_7E3GL[,4],Sample_8E3GL[,4],Sample_9E3GL[,4],Sample_10E4GL[,4],Sample_11E4GL[,4],Sample_12E4GL[,4],
+             Sample_1T1SF[,4],Sample_2T1SF[,4],Sample_3T1SF[,4],Sample_4T2SF[,4],Sample_5T2SF[,4],Sample_6T2SF[,4],
+             Sample_7T3SF[,4],Sample_8T3SF[,4],Sample_9T3SF[,4],Sample_10T4SF[,4],Sample_11T4SF[,4],Sample_12T4SF[,4],
+             Sample_1E1SF[,4],Sample_2E1SF[,4],Sample_3E1SF[,4],Sample_4E2SF[,4],Sample_5E2SF[,4],Sample_6E2SF[,4],
+             Sample_7E3SF[,4],Sample_8E3SF[,4],Sample_9E3SF[,4],Sample_10E4SF[,4],Sample_11E4SF[,4],Sample_12E4SF[,4])
 
-rownames(cts_1) <- cts_1[,1]
-cts_1 <- cts_1[,-1]
-cts_1 <- as.matrix(cts_1)
+colnames(cts) <- c("GeneID","untreatedLLlab1","untreatedLLlab2","untreatedLLlab3","untreatedLLlab4","untreatedLLlab5","untreatedLLlab6",
+                   "untreatedLLlab7","untreatedLLlab8","untreatedLLlab9","untreatedLLlab10","untreatedLLlab11","untreatedLLlab12",
+                   "treatedLLlab1","treatedLLlab2","treatedLLlab3","treatedLLlab4","treatedLLlab5","treatedLLlab6",
+                   "treatedLLlab7","treatedLLlab8","treatedLLlab9","treatedLLlab10","treatedLLlab11","treatedLLlab12",
+                   "untreatedLFfield1","untreatedLFfield2","untreatedLFfield3","untreatedLFfield4","untreatedLFfield5","untreatedLFfield6",
+                   "untreatedLFfield7","untreatedLFfield8","untreatedLFfield9","untreatedLFfield10","untreatedLFfield11","untreatedLFfield12",
+                   "treatedLFfield1","treatedLFfield2","treatedLFfield3","treatedLFfield4","treatedLFfield5","treatedLFfield6",
+                   "treatedLFfield7","treatedLFfield8","treatedLFfield9","treatedLFfield10","treatedLFfield11","treatedLFfield12",
+                   "untreatedGLlab1","untreatedGLlab2","untreatedGLlab3","untreatedGLlab4","untreatedGLlab5","untreatedGLlab6",
+                   "untreatedGLlab7","untreatedGLlab8","untreatedGLlab9","untreatedGLlab10","untreatedGLlab11","untreatedGLlab12",
+                   "treatedGLlab1","treatedGLlab2","treatedGLlab3","treatedGLlab4","treatedGLlab5","treatedGLlab6",
+                   "treatedGLlab7","treatedGLlab8","treatedGLlab9","treatedGLlab10","treatedGLlab11","treatedGLlab12",
+                   "untreatedSFfield1","untreatedSFfield2","untreatedSFfield3","untreatedSFfield4","untreatedSFfield5","untreatedSFfield6",
+                   "untreatedSFfield7","untreatedSFfield8","untreatedSFfield9","untreatedSFfield10","untreatedSFfield11","untreatedSFfield12",
+                   "treatedSFfield1","treatedSFfield2","treatedSFfield3","treatedSFfield4","treatedSFfield5","treatedSFfield6",
+                   "treatedSFfield7","treatedSFfield8","treatedSFfield9","treatedSFfield10","treatedSFfield11","treatedSFfield12")
+
+rownames(cts) <- cts[,1]
+cts <- cts[,-1]
+cts <- as.matrix(cts)
 ```
 
 Build a "coldata" table with infos on data:
 
 ```
-coldata_1 <- data.frame(treatment=c(rep("untreated",12), rep("treated",12),rep("untreated",12), rep("treated",12)),
-                        strain=c(rep("lab",24), rep("field",24)))
+coldata <- data.frame(treatment=c(rep(c(rep("untreated",12), rep("treated",12)),4)),
+                      location=c(rep("LL",24), rep("LF",24), rep("GL",24), rep("SF",24)),
+                      strain=c(rep(c(rep("lab",24), rep("field",24)),2)),
+                      replicate=c(rep(c(rep("one",3), rep("two",3), rep("three",3), rep("four",3)),8)))
 
-rownames(coldata_1) <- colnames(cts_1) # all samples names
+rownames(coldata) <- colnames(cts) # all samples names
 
-coldata_1$treatment <- factor(coldata_1$treatment)
-coldata_1$strain <- factor(coldata_1$strain)
+coldata$treatment <- factor(coldata$treatment)
+coldata$location <- factor(coldata$location)
+coldata$strain <- factor(coldata$strain)
+coldata$replicate <- factor(coldata$replicate)
 ```
 
 ### Running and interpreting R/DESeq
@@ -174,12 +197,33 @@ library("DESeq2")
 ncol(cts_1) # = 48
 nrow(coldata_1) # = 48 > check same value as above
 
-dds_1 <- DESeqDataSetFromMatrix(countData = cts_1,
-                                colData = coldata_1,
-                                design = ~strain+treatment+strain:treatment) # add interaction
-dds_1$treatment <- relevel(dds_1$treatment, ref = "untreated") # define reference
-dds_1$strain <- relevel(dds_1$strain, ref = "lab")
+ncol(cts)
+nrow(coldata) # check same value
 
-dds_1 <- DESeq(dds_1)
+library("DESeq2")
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design = ~treatment+strain+treatment:strain)
+
+dds$treatment <- relevel(dds$treatment, ref = "untreated")
+dds$strain <- relevel(dds$strain, ref = "lab")
+
+We performed a minimal pre-filtering to keep only rows that have at least 10 reads total before running DESeq:
 ```
+dds <- dds[ rowSums(counts(dds)) > 10, ] # 12 438
+dds <- DESeq(dds)
+```
+
+In case we needed to try an other design:
+```
+dds$group <- factor(paste0(dds$treatment, dds$strain))
+design(dds) <- ~ group
+dds <- DESeq(dds)
+```
+
+
+
+
+
+
 
