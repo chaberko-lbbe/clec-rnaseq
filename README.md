@@ -12,6 +12,7 @@ Treated insects were exposed to 0.1 ng of deltamethrin powder diluted in 1 μL o
 For each replicate, three individuals were randomly sampled **out of survivors**, and immediately flash-frozen in liquid nitrogen and stored at -80°, for a total of 48 individuals (3 individuals x 4 replicates x 4 conditions).
 
 ![Image 1](design-rnaseq.png)
+<img src="https://github.com/chaberko-lbbe/clec-rnaseq/design-rnaseq.png" width="50%" height="50%">
 
 ## Table of Contents
 
