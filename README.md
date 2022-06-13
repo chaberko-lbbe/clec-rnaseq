@@ -204,7 +204,7 @@ coldata$strain <- factor(coldata$strain)
 coldata$replicate <- factor(coldata$replicate)
 ```
 
-### Running and interpreting R/DESeq
+### Running R/DESeq
 
 Now try DESeq package !
 ```
@@ -220,7 +220,10 @@ library("DESeq2")
 dds <- DESeqDataSetFromMatrix(countData = cts,
                               colData = coldata,
                               design = ~treatment+strain+treatment:strain)
+```
 
+R will choose a reference level for factors based on alphabetical order, so we need to tell the DESeq2 functions which level we want to compare against (e.g. which level represents the control group)
+```
 dds$treatment <- relevel(dds$treatment, ref = "untreated")
 dds$strain <- relevel(dds$strain, ref = "lab")
 ```
@@ -238,6 +241,54 @@ design(dds) <- ~ group
 dds <- DESeq(dds)
 ```
 
+### Samples overview
+
+
+
+A heatmap of this distance matrix gives us an overview over similarities and dissimilarities between samples.
+
+
+res <- results(dds, name="condition_treated_vs_untreated")
+res <- results(dds, contrast=c("condition","treated","untreated"))
+One exception to the equivalence of these two commands, is that, using contrast will additionally set to 0 the estimated LFC in a comparison of two groups, where all of the counts in the two groups are equal to 0 (while other groups have positive counts). As this may be a desired feature to have the LFC in these cases set to 0, one can use contrast to build these results tables.
+
+Shrinkage of effect size (LFC estimates) is useful for visualization and ranking of genes. To shrink the LFC, we pass the dds object to the function lfcShrink. Below we specify to use the apeglm method for effect size shrinkage, which improves on the previous estimator.
+
+resLFC <- lfcShrink(dds, coef="condition_treated_vs_untreated", type="apeglm")
+
+If the shrinkage estimator apeglm is used in published research, please cite:
+Zhu, A., Ibrahim, J.G., Love, M.I. (2018) Heavy-tailed prior distributions for sequence count data: removing the noise and preserving large differences. Bioinformatics. 10.1093/bioinformatics/bty895
+
+sum(res$padj < 0.1, na.rm=TRUE)
+
+Note that the results function automatically performs independent filtering based on the mean of normalized counts for each gene, optimizing the number of genes which will have an adjusted p value below a given FDR cutoff, alpha. By default the argument alpha is set to 0.1.
+
+res05 <- results(dds, alpha=0.05)
+sum(res05$padj < 0.05, na.rm=TRUE) # somme LFC> 0 & <0
+
+Examine the counts of reads for a single gene across the groups: plotCounts
+
+For a particular gene, a log2 fold change of -1 for condition treated vs untreated means that the treatment induces a multiplicative change in observed gene expression level of 2^{-1} = 0.5 compared to the untreated condition. If the variable of interest is continuous-valued, then the reported log2 fold change is per unit of change of that variable.
+
+Since count values for a gene can be zero in some conditions (and non-zero in others), some advocate the use of pseudocounts, i.e. transformations of the form:
+\[ y = \log_2(n + n_0) \]
+> concept of variance stabilizing transformations (VST) (Tibshirani 1988; Huber et al. 2003; Anders and Huber 2010)
+> regularized logarithm or rlog, which incorporates a prior on the sample differences (Love, Huber, and Anders 2014)
+= transformed data on the log2 scale which has been normalized with respect to library size or other normalization factors
+argument blind, for whether the transformation should be blind to the sample information specified by the design formula
+blind=T > to perform sample QA (quality assurance)
+blind=F > still for the most part not using the information about which samples were in which experimental group in applying the transformation.
+
+
+simpler approach than adding interaction terms explicitly to the design formula is to perform the following steps:
+* combine the factors of interest into a single factor with all combinations of the original factors
+* change the design to include just this factor, e.g. ~ group
+
+### Designs with interaction terms
+
+Unlike for a design ~genotype + condition, where the condition effect represents the overall effect controlling for differences due to genotype, 
+by adding genotype:condition, the main condition effect only represents the effect of condition for the reference level of genotype (I, or whichever level was defined by the user as the reference level). 
+The interaction terms genotypeII.conditionB and genotypeIII.conditionB give the difference between the condition effect for a given genotype and the condition effect for the reference genotype.
 
 
 
