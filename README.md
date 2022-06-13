@@ -11,7 +11,7 @@ Four replicates of 8 insects were performed for each condition: treated lab, unt
 Treated insects were exposed to 0.1 ng of deltamethrin powder diluted in 1 μL of acetone, whereas control insects received 1 μL of acetone only. This dose of insecticide should correspond to a lethal dose for 50% of London Lab strain.
 For each replicate, three individuals were randomly sampled **out of survivors**, and immediately flash-frozen in liquid nitrogen and stored at -80°, for a total of 48 individuals (3 individuals x 4 replicates x 4 conditions).
 
-<img src="https://github.com/chaberko-lbbe/clec-rnaseq/blob/main/design-rnaseq.png" width="50%" height="50%">
+<img src="https://github.com/chaberko-lbbe/clec-rnaseq/blob/main/design-rnaseq.png" width="25%" height="25%">
 
 ## Table of Contents
 
