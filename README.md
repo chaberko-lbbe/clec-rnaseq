@@ -98,7 +98,7 @@ sum(Sample_2E1LL[,4]) # = 10707278
 sum(Sample_2E1LL[,3]) # = 223975.
 ```
 
-## Differential Expression analyzes
+## Differential Expression analysis
 
 Our goal was to performed a differential expression analyzes between London Lab (LL) and London Field (LF) strains, whether they survived an insecticide exposure or not.
 We used as input "ReadsPerGene.out.tab" files 
