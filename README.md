@@ -2,7 +2,7 @@
 
 You can learn more about the context of this repository in the article from which it stems: (link to come, currently submitted, latest update: 15.03.24).
 
-Contact : chloe.haberkorn@zoologi.su.se / chloehbk@gmail.com
+Contact : (anonymous during reviewing process)
 
 ## Table of Contents
 
