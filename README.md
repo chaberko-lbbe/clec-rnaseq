@@ -1,6 +1,6 @@
 ![Image 1](bedbugs.png)
 
-You can learn more about the context of this repository in the article from which it stems: (link to come, currently submitted, latest update: 25.03.24).
+You can learn more about the context of this repository in the preprint from which it stems: https://www.biorxiv.org/content/10.1101/2024.03.15.584589v1 (article currently submitted, latest update: 25.03.24).
 
 Contact: chloehbk@gmail.com
 
